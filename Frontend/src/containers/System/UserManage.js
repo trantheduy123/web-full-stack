@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
+
 import { getAllUsers } from "../../services/userService";
+import ModalUser from "./ModalUser";
 class UserManage extends Component {
   constructor(props) {
     super(props);
@@ -21,12 +23,19 @@ class UserManage extends Component {
     console.log("get user from node.js : ", response);
   }
 
+  handleAddNewUser = () => {
+    this.setState({});
+  };
+
   render() {
     let arrUsers = this.state.arrUsers;
     return (
       <div className="user-container">
         <div className="title text-center">Manage users with duy</div>
-        <div className="user-table mt-3 mx-1">
+        <div className="mx-1">
+          <ModalUser />
+        </div>
+        <div className="user-table mt-3 mx-1 ">
           <table id="customers">
             <tr>
               <th>Email</th>

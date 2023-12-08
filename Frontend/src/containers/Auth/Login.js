@@ -65,7 +65,7 @@ class Login extends Component {
           <div className="login-content">
             <div className="col-12 login-text">Login</div>
             <div className="col-12 form-group login-input">
-              <label>UserName:</label>
+              <label className="mb-2">UserName:</label>
               <input
                 type="text"
                 className="form-control"
@@ -75,7 +75,7 @@ class Login extends Component {
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Password:</label>
+              <label className="mb-2">Password:</label>
               <div className="custom-input-password">
                 <input
                   type={this.state.isShowPassword ? "text" : "password"}

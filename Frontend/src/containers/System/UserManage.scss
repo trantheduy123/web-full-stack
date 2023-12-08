@@ -87,3 +87,54 @@ td {
   }
 }
 
+$primary-color: #1b222b; // Change this to your desired primary color
+
+.Form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #0c0f11; // Change this to your desired background color
+  border: 1px solid #172f47;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  .FormGroup {
+    margin-bottom: 20px;
+
+    Label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    Input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+
+      &:focus {
+        border-color: $primary-color;
+        outline: none;
+        box-shadow: 0 0 5px rgba($primary-color, 0.5);
+      }
+    }
+  }
+
+  Button {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}
