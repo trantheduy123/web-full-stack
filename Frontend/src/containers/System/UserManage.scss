@@ -1,0 +1,88 @@
+// styles.scss
+
+// Define general styles for the user-container
+.user-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+// Style the title
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+// Style the user-table
+.user-table {
+  margin-top: 15px;
+}
+
+// Style the table
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+// Style table header
+th {
+  background-color: #83929c;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+// Style table rows
+tr {
+  &:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+// Style table cells
+td {
+  padding: 10px;
+}
+
+// Style buttons
+.btn-edit {
+  width: 50px;
+  background-color: #2ecc71;
+  color: #ccc;
+  border: none;
+  padding: 8px;
+  margin-right: 5px;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background-color:transparent !important;
+    color: #2ecc71 !important;
+  }
+}
+.btn-delete {
+  width: 50px;
+  background-color: #cc2e2e;
+  color: #ccc;
+  border: none;
+  padding: 8px;
+  margin-right: 5px;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background-color:transparent !important;
+    color: #cc2e2e !important;
+  }
+}
