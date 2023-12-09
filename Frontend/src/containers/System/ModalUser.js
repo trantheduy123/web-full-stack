@@ -20,11 +20,79 @@ class ModalUser extends Component {
     super(props);
     this.state = {
       modal: false,
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      phonenumber: "",
+      gender: "",
+      roleId: "",
     };
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle = () => {
     this.setState((prevState) => ({ modal: !prevState.modal }));
+  };
+  handleOnChangeInput = (e, id) => {
+    let copyState = { ...this.state };
+    copyState[id] = e.target.value;
+    this.setState({
+      ...copyState,
+    });
+  };
+
+  checkValidInput = () => {
+    let isValid = true;
+    let arrInput = [
+      "email",
+      "password",
+      "firstName",
+      "lastName",
+      "address",
+      "phonenumber",
+      "gender",
+      "roleId",
+    ];
+
+    for (let i = 0; i < arrInput.length; i++) {
+      if (!this.state[arrInput[i]]) {
+        isValid = false;
+        alert("Missing parameter: " + arrInput[i]);
+        break;
+      }
+    }
+
+    return isValid;
+  };
+
+  isValidEmail = (email) => {
+    // Simple email validation, you may want to use a more robust validation library
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  isValidPhoneNumber = (phoneNumber) => {
+    // Simple phone number validation, you may want to use a more robust validation library
+    const phoneRegex = /^\d{10}$/; // Assuming a 10-digit phone number
+    return phoneRegex.test(phoneNumber);
+  };
+
+  handleAddNewUser = () => {
+    let isValid = this.checkValidInput();
+
+    if (isValid) {
+      if (!this.isValidEmail(this.state.email)) {
+        alert("Invalid email format");
+      } else if (!this.isValidPhoneNumber(this.state.phonenumber)) {
+        alert("Invalid phone number format");
+      } else {
+        // Call API to create new user
+        this.props.createNewuser(this.state);
+        this.setState({ modal: false });
+      }
+    }
   };
 
   render() {
@@ -35,7 +103,7 @@ class ModalUser extends Component {
           className="btn btn-primary px-2"
           onClick={this.toggle}
         >
-          <i class="fas fa-plus"></i> Add new user
+          <i className="fas fa-plus"></i> Add new user
         </Button>
         <Modal
           isOpen={this.state.modal}
@@ -66,6 +134,10 @@ class ModalUser extends Component {
                       name="email"
                       placeholder="Email"
                       type="email"
+                      onChange={(e) => {
+                        this.handleOnChangeInput(e, "email");
+                      }}
+                      value={this.state.email}
                     />
                   </FormGroup>
                 </Col>
@@ -79,6 +151,9 @@ class ModalUser extends Component {
                       name="password"
                       placeholder="password"
                       type="password"
+                      onChange={(e) => {
+                        this.handleOnChangeInput(e, "password");
+                      }}
                     />
                   </FormGroup>
                 </Col>
@@ -87,12 +162,16 @@ class ModalUser extends Component {
               <Row>
                 <Col md={6}>
                   <FormGroup className="FromGroup">
-                    <Label className="Label">First Name</Label>
+                    <Label className="Label">First name</Label>
                     <Input
                       className="Input"
                       name="firstName"
                       placeholder="First name"
                       type="text"
+                      onChange={(e) => {
+                        this.handleOnChangeInput(e, "firstName");
+                      }}
+                      value={this.state.firstName}
                     />
                   </FormGroup>
                 </Col>
@@ -104,6 +183,10 @@ class ModalUser extends Component {
                       name="lastName"
                       placeholder="Last name"
                       type="text"
+                      onChange={(e) => {
+                        this.handleOnChangeInput(e, "lastName");
+                      }}
+                      value={this.state.lastName}
                     />
                   </FormGroup>
                 </Col>
@@ -119,6 +202,10 @@ class ModalUser extends Component {
                       name="address"
                       placeholder="Address"
                       type="text"
+                      onChange={(e) => {
+                        this.handleOnChangeInput(e, "address");
+                      }}
+                      value={this.state.address}
                     />
                   </FormGroup>
                 </Col>
@@ -132,6 +219,10 @@ class ModalUser extends Component {
                       name="phonenumber"
                       placeholder="Phone number"
                       type="text"
+                      onChange={(e) => {
+                        this.handleOnChangeInput(e, "phonenumber");
+                      }}
+                      value={this.state.phonenumber}
                     />
                   </FormGroup>
                 </Col>
@@ -146,6 +237,10 @@ class ModalUser extends Component {
                   id="exampleSelect"
                   name="gender"
                   type="select"
+                  onChange={(e) => {
+                    this.handleOnChangeInput(e, "gender");
+                  }}
+                  value={this.state.gender}
                 >
                   <option className="seclect" value="1">
                     Male
@@ -159,7 +254,15 @@ class ModalUser extends Component {
                 <Label className="Label" for="inputZip">
                   Role
                 </Label>
-                <Input className="Input" name="roleId" type="select">
+                <Input
+                  className="Input"
+                  name="roleId"
+                  type="select"
+                  onChange={(e) => {
+                    this.handleOnChangeInput(e, "roleId");
+                  }}
+                  value={this.state.roleId}
+                >
                   <option className="seclect" value="1">
                     Admin
                   </option>
@@ -174,8 +277,15 @@ class ModalUser extends Component {
             </Form>
           </ModalBody>
           <ModalFooter>
+            <Button
+              color="primary"
+              onClick={this.handleAddNewUser}
+              className="Button"
+            >
+              Add new
+            </Button>
             <Button color="primary" onClick={this.toggle} className="Button">
-              Submit
+              Close
             </Button>
           </ModalFooter>
         </Modal>
