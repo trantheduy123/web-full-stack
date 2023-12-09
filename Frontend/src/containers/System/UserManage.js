@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
+
 import { connect } from "react-redux";
 import "./UserManage.scss";
 import { emitter } from "../../utils/emitter";
@@ -8,13 +8,17 @@ import {
   getAllUsers,
   createNewUserServicer,
   deleteUserService,
+  editUserService,
 } from "../../services/userService";
 import ModalUser from "./ModalUser";
+import ModalEditUser from "./ModalEditUser";
 class UserManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrUsers: [],
+      isOpenEditModal: true,
+      editedUser: {},
     };
   }
 
@@ -80,6 +84,36 @@ class UserManage extends Component {
     }
     await this.getAllUsersFromReact();
   };
+  editUser = (user) => {
+    this.setState({
+      isEditModalOpen: true,
+      editedUser: user,
+    });
+  };
+
+  handleEditUser = (user) => {
+    console.log("check user", user);
+    this.setState({
+      isOpenEditModal: true,
+    });
+  };
+
+  editUser = async (user) => {
+    try {
+      let res = await editUserService(user);
+      if (res && res.errCode === 0) {
+        console.log("User updated successfully:", res.data);
+        this.setState({
+          isEditModalOpen: false,
+        });
+        await this.getAllUsersFromReact();
+      } else {
+        alert("Error updating user:", res.errMessage);
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred during user update:", error);
+    }
+  };
 
   render() {
     let arrUsers = this.state.arrUsers;
@@ -98,6 +132,8 @@ class UserManage extends Component {
                 <th>Last Name</th>
                 <th>Address</th>
                 <th>Phone</th>
+                <th>Role</th>
+                <th>Gender</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -111,10 +147,11 @@ class UserManage extends Component {
                     <td>{item.lastName}</td>
                     <td>{item.address}</td>
                     <td>{item.phonenumber}</td>
+                    <td>{item.roleId}</td>
+                    <td>{item.gender}</td>
                     <td>
-                      <button className="btn-edit">
-                        <i className="fas fa-pencil-alt"></i>
-                      </button>
+                      <ModalEditUser item={item} editUser={this.editUser} />
+
                       <button
                         className="btn-delete"
                         onClick={() => this.handleDeleteUser(item)}
