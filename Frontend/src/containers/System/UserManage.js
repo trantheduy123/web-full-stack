@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
+import { emitter } from "../../utils/emitter";
 
-import { getAllUsers, createNewUserServicer } from "../../services/userService";
+import {
+  getAllUsers,
+  createNewUserServicer,
+  deleteUserService,
+} from "../../services/userService";
 import ModalUser from "./ModalUser";
 class UserManage extends Component {
   constructor(props) {
@@ -17,14 +22,25 @@ class UserManage extends Component {
     await this.getAllUsersFromReact();
   }
   getAllUsersFromReact = async () => {
-    let response = await getAllUsers("All");
-    if (response && response.errCode === 0) {
-      this.setState({
-        arrUsers: response.users,
-      });
+    try {
+      const response = await getAllUsers("All");
+
+      if (response && response.errCode === 0) {
+        this.setState({
+          arrUsers: response.users,
+        });
+      } else {
+        console.error("Error fetching users:", response.errMessage);
+        // You might want to set a different state or show an error message to the user
+      }
+    } catch (error) {
+      console.error(
+        "An unexpected error occurred during user fetching:",
+        error
+      );
+      // You might want to set a different state or show an error message to the user
     }
   };
-
   createNewuser = async (data) => {
     try {
       let response = await createNewUserServicer(data);
@@ -32,6 +48,7 @@ class UserManage extends Component {
         alert(response.errMessage);
       } else {
         await this.getAllUsersFromReact();
+        emitter.emit("EVENT_CLEAR_MODAL_DATA", { id: "your id" });
       }
       console.log("respone create user", response);
     } catch (e) {
@@ -39,8 +56,29 @@ class UserManage extends Component {
     }
   };
 
-  handleAddNewUser = () => {
-    this.setState({});
+  handleDeleteUser = async (user) => {
+    try {
+      // Show a confirmation dialog before deleting
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this user?"
+      );
+
+      if (isConfirmed) {
+        const res = await deleteUserService(user.id);
+        if (res && res.errCode === 0) {
+          // Successful deletion, update the user list
+          await this.getAllUsersFromReact();
+        }
+      } else {
+        // User canceled the deletion
+        console.log("User canceled deletion");
+      }
+    } catch (e) {
+      // Handle unexpected errors
+      console.error("An error occurred during user deletion:", e);
+      alert("An unexpected error occurred. Please try again later.");
+    }
+    await this.getAllUsersFromReact();
   };
 
   render() {
@@ -77,7 +115,10 @@ class UserManage extends Component {
                       <button className="btn-edit">
                         <i className="fas fa-pencil-alt"></i>
                       </button>
-                      <button className="btn-delete">
+                      <button
+                        className="btn-delete"
+                        onClick={() => this.handleDeleteUser(item)}
+                      >
                         <i className="fas fa-trash-alt"></i>
                       </button>
                     </td>

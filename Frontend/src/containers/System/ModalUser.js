@@ -14,6 +14,7 @@ import {
   Col,
 } from "reactstrap";
 import "./ModalUser.scss";
+import { emitter } from "../../utils/emitter";
 class ModalUser extends Component {
   componentDidMount() {}
   constructor(props) {
@@ -30,6 +31,23 @@ class ModalUser extends Component {
       roleId: "",
     };
     this.toggle = this.toggle.bind(this);
+    this.listenToEmiiter();
+  }
+
+  listenToEmiiter() {
+    emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
+      this.setState({
+        modal: false,
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        phonenumber: "",
+        gender: "",
+        roleId: "",
+      });
+    });
   }
 
   toggle = () => {
@@ -73,20 +91,12 @@ class ModalUser extends Component {
     return emailRegex.test(email);
   };
 
-  isValidPhoneNumber = (phoneNumber) => {
-    // Simple phone number validation, you may want to use a more robust validation library
-    const phoneRegex = /^\d{10}$/; // Assuming a 10-digit phone number
-    return phoneRegex.test(phoneNumber);
-  };
-
   handleAddNewUser = () => {
     let isValid = this.checkValidInput();
 
     if (isValid) {
       if (!this.isValidEmail(this.state.email)) {
         alert("Invalid email format");
-      } else if (!this.isValidPhoneNumber(this.state.phonenumber)) {
-        alert("Invalid phone number format");
       } else {
         // Call API to create new user
         this.props.createNewuser(this.state);
