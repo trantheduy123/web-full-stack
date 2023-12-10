@@ -1,0 +1,84 @@
+.home-header-container {
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    // Add any other global styling for the container
+  
+    .home-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px; // Adjust padding as needed
+      // Add any other global styling for the content
+  
+      .left-content {
+        display: flex;
+        align-items: center;
+        width: 20%;
+        justify-content: space-evenly;
+  
+        i.fas.fa-bars {
+          font-size: 24px;
+          color: #333;
+          cursor: pointer;
+          // Add any other styling for the bars icon
+        }
+  
+        .header-logo {
+            background: url(../../assets/logo.svg) center center no-repeat;
+          height: 5vh;
+         width: 50%;
+          border-radius: 50%;
+          margin-left: 15px;
+          cursor: pointer;
+        }
+      }
+  
+      .center-content {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+  
+        .child-content {
+          flex: 1;
+          text-align: center;
+  
+          b {
+            color: #333;
+            font-size: 18px;
+            // Add any other styling for the bold text
+          }
+  
+          .subs-title {
+            color: #777;
+            font-size: 14px;
+            // Add any other styling for the subtitle
+          }
+        }
+      }
+  
+      .right-content {
+        display: flex;
+        align-items: center;
+        width: 20%;
+  
+        .support {
+          color: #3498db;
+          font-size: 16px;
+          cursor: pointer;
+          margin-right: 20px;
+          // Add any other styling for the support section
+        }
+  
+        .flag {
+          color: #333;
+          font-size: 18px;
+          margin-right: 20px;
+          justify-content: center;
+          // Add any other styling for the flag section
+        }
+      }
+    }
+  }
+  
+    
