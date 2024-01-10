@@ -15,12 +15,15 @@ import { path } from "../utils";
 import Home from "../routes/Home";
 //import Login from '../routes/Login';
 import Login from "./Auth/Login";
+import FacebookCallback from "./Auth/FbLogin";
 
 import Header from "./Header/Header";
 import System from "../routes/System";
 import HomePage from "./HomePage/HomePage";
 
 import { CustomToastCloseButton } from "../components/CustomToast";
+import Forgot from "./Auth/Forgot";
+import ResetPassWord from "./Auth/ResetPassWord";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -56,10 +59,19 @@ class App extends Component {
                   component={userIsNotAuthenticated(Login)}
                 />
                 <Route
+                  path={path.FORGOT}
+                  component={userIsNotAuthenticated(Forgot)}
+                />
+                <Route
                   path={path.SYSTEM}
                   component={userIsAuthenticated(System)}
                 />
                 <Route path={path.HOMEPAGE} component={HomePage} />
+                <Route path={"/auth/facebook"} component={FacebookCallback} />
+                <Route
+                  path={"/resetpassword/:token"}
+                  component={ResetPassWord}
+                />
               </Switch>
             </span>
 

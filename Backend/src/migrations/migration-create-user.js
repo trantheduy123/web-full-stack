@@ -14,6 +14,12 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
+      passwordToken: {
+        type: Sequelize.STRING,
+      },
+      passwordTokenDate: {
+        type: Sequelize.STRING,
+      },
       firstName: {
         type: Sequelize.STRING,
       },

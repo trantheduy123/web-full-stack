@@ -1,5 +1,7 @@
 import db from "../models/index";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import { Op } from "sequelize";
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -159,6 +161,9 @@ let deleteUser = async (userId) => {
   }
 };
 
+const hashPassword = (password) =>
+  bcrypt.hashSync(password, bcrypt.genSaltSync(12));
+
 let updateUserData = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -206,10 +211,98 @@ let updateUserData = (data) => {
   });
 };
 
+const forgotPasswordService = (email) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await db.User.findOne({
+        where: { email }, // Using the 'email' parameter directly
+        raw: false,
+      });
+
+      if (!response) {
+        resolve({
+          err: 1,
+          msg: "Email này chưa được đăng ký",
+        });
+      } else {
+        if (response instanceof db.User) {
+          const resetToken = crypto.randomBytes(32).toString("hex");
+          response.passwordToken = resetToken;
+          response.passwordTokenDate = Date.now() + 5 * 60 * 1000; // Thời gian token: 5p
+
+          // Saving the changes to the database
+          const savedResponse = await response.save();
+          console.log(savedResponse); // Log the saved response
+
+          resolve({
+            err: 0,
+            passwordTokenDate: resetToken,
+            msg: "Tin nhắn đã được gửi đến email của bạn",
+          });
+        } else {
+          resolve({
+            err: 1,
+            msg: "Lỗi trong quá trình đặt lại mật khẩu",
+          });
+        }
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+const resetPasswordService = async (password, token) => {
+  try {
+    // Check if 'token' is missing in the data
+    if (!token) {
+      return {
+        err: 1,
+        msg: "Missing required parameter: token",
+      };
+    }
+    let user = await db.User.findOne({
+      where: { passwordToken: token },
+      passwordTokenDate: { [Op.gt]: Date.now() },
+      raw: false,
+    });
+
+    if (!user) {
+      return {
+        err: 1,
+        msg: "Bạn đã hết thời hạn thay đổi mật khẩu, vui lòng thử lại!",
+      };
+    }
+
+    if (user) {
+      user.password = hashPassword(password);
+      user.passwordToken = null;
+      user.passwordTokenDate = null;
+
+      console.log(user);
+
+      // Save the updated user
+      await user.save();
+
+      return {
+        err: 0,
+        msg: "Đổi mật khẩu thành công",
+      };
+    }
+  } catch (error) {
+    return {
+      err: -1,
+      msg: "An unexpected error occurred during password reset.",
+      error: error.message || "Unknown error",
+    };
+  }
+};
+
 module.exports = {
   handleUserLogin: handleUserLogin,
   getAllUsers: getAllUsers,
   createNewUser: createNewUser,
   deleteUser: deleteUser,
   updateUserData: updateUserData,
+  forgotPasswordService: forgotPasswordService,
+  resetPasswordService: resetPasswordService,
 };

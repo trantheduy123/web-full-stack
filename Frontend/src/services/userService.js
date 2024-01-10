@@ -25,10 +25,20 @@ const editUserService = (inputData) => {
   return axios.put("/api/edit-user", inputData);
 };
 
+const forgotUserPassword = (userEmail) => {
+  return axios.post("/api/passwordforgot", { email: userEmail });
+};
+
+const apiResetPassword = (data) => {
+  return axios.put("/api/resetpassword", data);
+};
+
 export {
   handleLoginApi,
   getAllUsers,
   createNewUserServicer,
   deleteUserService,
   editUserService,
+  forgotUserPassword,
+  apiResetPassword,
 };

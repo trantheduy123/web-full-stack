@@ -21,6 +21,11 @@ let initWebRoutes = (app) => {
   router.put("/api/edit-user", userController.handeleEditUser);
   router.delete("/api/delete-user", userController.handeleDeleteUser);
 
+  router.post("/api/facebook", userController.fbLogin);
+  router.post("/api/passwordforgot", userController.forgotPassword);
+
+  router.put("/api/resetpassword", userController.resetPassword);
+
   return app.use("/", router);
 };
 
