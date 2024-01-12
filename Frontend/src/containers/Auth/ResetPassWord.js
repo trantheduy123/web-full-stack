@@ -60,10 +60,17 @@ class ResetPassWord extends Component {
       <div className="login-blackground">
         <div className="login-container">
           <div className="login-content">
-            <div className="col-12 login-text">Create new password</div>
+            <h2 className="user_registered-title">CREATE PASSWORD</h2>
             <div className="col-12 form-group login-input">
               <label className="mb-2">New password:</label>
-              <div className="custom-input-password">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  color: "crimson",
+                }}
+                className="custom-input-password"
+              >
                 <input
                   type={this.state.isShowPassword ? "text" : "password"}
                   className="form-control"
@@ -94,15 +101,6 @@ class ResetPassWord extends Component {
                     this.handleOnChangeConfirmPassword(event)
                   }
                 />
-                <span onClick={() => this.handleShowhidePassword()}>
-                  <i
-                    className={
-                      this.state.isShowPassword
-                        ? "fas fa-eye"
-                        : "fas fa-eye-slash"
-                    }
-                  ></i>
-                </span>
               </div>
             </div>
             <div className="col-12 " style={{ color: "red" }}>

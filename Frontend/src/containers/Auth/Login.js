@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import "./Login.scss";
+import { toast, ToastContainer } from "react-toastify";
+
 import { handleLoginApi } from "../../services/userService";
 
 class Login extends Component {
@@ -16,11 +18,13 @@ class Login extends Component {
       errMessage: "",
     };
   }
+
   handleOnChangeUserName = (event) => {
     this.setState({
       username: event.target.value,
     });
   };
+
   handleOnChangePassword = (event) => {
     this.setState({
       password: event.target.value,
@@ -31,14 +35,27 @@ class Login extends Component {
     this.setState({
       errMessage: "",
     });
+
     try {
       let data = await handleLoginApi(this.state.username, this.state.password);
+
       if (data && data.errCode !== 0) {
         this.setState({
           errMessage: data.message,
         });
+
+        // Display error message using react-toastify with 2 seconds duration
+        toast.error(data.message, {
+          autoClose: 2000,
+        });
       }
+
       if (data && data.errCode === 0) {
+        // Display success message using react-toastify with 2 seconds duration
+        toast.success("Login successful!", {
+          autoClose: 2000,
+        });
+
         this.props.userLoginSuccess(data.user);
       }
     } catch (error) {
@@ -46,6 +63,11 @@ class Login extends Component {
         if (error.response.data) {
           this.setState({
             errMessage: error.response.data.message,
+          });
+
+          // Display error message using react-toastify with 2 seconds duration
+          toast.error(error.response.data.message, {
+            autoClose: 2000,
           });
         }
       }
@@ -60,72 +82,94 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-blackground">
-        <div className="login-container">
-          <div className="login-content">
-            <div className="col-12 login-text">Login</div>
-            <div className="col-12 form-group login-input">
-              <label className="mb-2">UserName:</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter your username"
-                value={this.state.username}
-                onChange={(event) => this.handleOnChangeUserName(event)}
-              />
-            </div>
-            <div className="col-12 form-group login-input">
-              <label className="mb-2">Password:</label>
-              <div className="custom-input-password">
-                <input
-                  type={this.state.isShowPassword ? "text" : "password"}
-                  className="form-control"
-                  placeholder="Enter your password"
-                  value={this.state.password}
-                  onChange={(event) => this.handleOnChangePassword(event)}
-                />
-
-                <span onClick={() => this.handleShowhidePassword()}>
-                  <i
-                    className={
-                      this.state.isShowPassword
-                        ? "fas fa-eye"
-                        : "fas fa-eye-slash"
-                    }
-                  ></i>
-                </span>
-              </div>
-            </div>
-            <div className="col-12 " style={{ color: "red" }}>
-              {this.state.errMessage}
-            </div>
-            <div className="col-12 ">
-              <button
-                className="btn-login"
-                onClick={() => {
-                  this.handleLogin();
-                }}
+      <div className="user">
+        <div className="user_options-container">
+          <div className="user_options-text">
+            <div className="user_options-unregistered">
+              <h2 className="user_unregistered-title">
+                Don't have an account?
+              </h2>
+              <p className="user_unregistered-text">
+                Welcome to booking dental clinic specializing in providing.
+                <br />
+                dental services Register an account to book an online medical
+                examination.
+              </p>
+              <a
+                style={{ textDecoration: "none" }}
+                className="user_unregistered-signup"
+                type="button"
+                href="signup"
               >
+                Sign up
+              </a>
+            </div>
+
+            <div className="user_options-registered">
+              <h2 className="user_registered-title">Have an account?</h2>
+              <p className="user_registered-text">
+                Log in to get online service consultation
+              </p>
+              <button className="user_registered-login" id="login-button">
                 Login
               </button>
             </div>
-            <div className="col-12">
-              <a className="forgot-password" href="forgot">
-                Forgot your password
-              </a>
-            </div>
-            <div className="col-12 text-center mt-3">
-              <span className="text-other-login">Or login with:</span>
-            </div>
-            <div className="col-12 social-login">
-              <i className="fab fa-google-plus-g google"></i>
-              <a
-                className="fab fa-facebook facebook"
-                href="https://www.facebook.com/v18.0/dialog/oauth?client_id=1096141791421266&redirect_uri=http://localhost:3000/auth/facebook&scope=email"
-              ></a>
+          </div>
+
+          <div className="user_options-forms" id="user_options-forms">
+            <div className="user_forms-login">
+              <h2 className="forms_title">Login</h2>
+              <div className="forms_form">
+                <div className="forms_fieldset">
+                  <div className="forms_field">
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="forms_field-input"
+                      value={this.state.username}
+                      onChange={(event) => this.handleOnChangeUserName(event)}
+                    />
+                  </div>
+                  <div className="forms_field">
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      className="forms_field-input"
+                      value={this.state.password}
+                      onChange={(event) => this.handleOnChangePassword(event)}
+                      autoComplete="on"
+                    />
+                  </div>
+                </div>
+                <div className="forms_buttons">
+                  <a
+                    type="button"
+                    href="forgot"
+                    className="forms_buttons-forgot"
+                  >
+                    Forgot password?
+                  </a>
+                  <button
+                    className="forms_buttons-action"
+                    onClick={this.handleLogin}
+                  >
+                    Login
+                  </button>
+                </div>
+                <div className="col-12 text-center mt-3">
+                  <span className="text-other-login">Or login with:</span>
+                </div>
+
+                <a
+                  className="fab fa-facebook facebook-link"
+                  href="https://www.facebook.com/v18.0/dialog/oauth?client_id=1096141791421266&redirect_uri=http://localhost:3000/auth/facebook&scope=email"
+                ></a>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* React Toastify Container */}
       </div>
     );
   }
@@ -140,7 +184,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    /* userLoginFail: () => dispatch(actions.userLoginFail()), */
     userLoginSuccess: (userInfor) =>
       dispatch(actions.userLoginSuccess(userInfor)),
   };

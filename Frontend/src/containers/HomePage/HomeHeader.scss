@@ -1,84 +1,233 @@
+// Variables
+$primaryColor: #3498db;
+$secondaryColor: #fff;
+$searchBoxWidth: 50%;
+
+// Global container styles
 .home-header-container {
     background-color: #f8f8f8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    // Add any other global styling for the container
-  
+
+    // Global content styles
     .home-header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px; // Adjust padding as needed
-      // Add any other global styling for the content
-  
-      .left-content {
-        display: flex;
-        align-items: center;
-        width: 20%;
-        justify-content: space-evenly;
-  
-        i.fas.fa-bars {
-          font-size: 24px;
-          color: #333;
-          cursor: pointer;
-          // Add any other styling for the bars icon
-        }
-  
-        .header-logo {
-            background: url(../../assets/logo.svg) center center no-repeat;
-          height: 5vh;
-         width: 50%;
-          border-radius: 50%;
-          margin-left: 15px;
-          cursor: pointer;
-        }
-      }
-  
-      .center-content {
         display: flex;
         justify-content: space-between;
-        flex-grow: 1;
-  
-        .child-content {
-          flex: 1;
-          text-align: center;
-  
-          b {
-            color: #333;
-            font-size: 18px;
-            // Add any other styling for the bold text
-          }
-  
-          .subs-title {
-            color: #777;
-            font-size: 14px;
-            // Add any other styling for the subtitle
-          }
-        }
-      }
-  
-      .right-content {
-        display: flex;
         align-items: center;
-        width: 20%;
-  
-        .support {
-          color: #3498db;
-          font-size: 16px;
-          cursor: pointer;
-          margin-right: 20px;
-          // Add any other styling for the support section
+        padding: 20px;
+
+        // Left content styles
+        .left-content {
+            display: flex;
+            align-items: center;
+            width: 20%;
+            justify-content: space-evenly;
+
+            // Bars icon styles
+            i.fas.fa-bars {
+                font-size: 24px;
+                color: #333;
+                cursor: pointer;
+            }
+
+            // Header logo styles
+            .header-logo {
+                background: url(../../assets/logo.svg) center center no-repeat;
+                height: 5vh;
+                width: 50%;
+                border-radius: 50%;
+                margin-left: 15px;
+                cursor: pointer;
+            }
         }
-  
-        .flag {
-          color: #333;
-          font-size: 18px;
-          margin-right: 20px;
-          justify-content: center;
-          // Add any other styling for the flag section
+
+        // Center content styles
+        .center-content {
+            display: flex;
+            justify-content: space-between;
+            flex-grow: 1;
+
+            // Child content styles
+            .child-content {
+                flex: 1;
+                text-align: center;
+
+                // Bold text styles
+                b {
+                    color: #333;
+                    font-size: 1.3rem;
+                  
+                }
+
+                // Subtitle styles
+                .subs-title {
+                    color: #777;
+                    font-size: 1.2rem;
+                    padding-top: 10px;
+                }
+            }
         }
-      }
+
+        // Right content styles
+        .right-content {
+            display: flex;
+            align-items: center;
+            width: 20%;
+
+            // Support section styles
+            .support {
+                color: $primaryColor;
+                font-size: 16px;
+                cursor: pointer;
+                margin-right: 20px;
+            }
+
+            // Flag section styles
+            .flag {
+                color: #333;
+                font-size: 18px;
+                margin-right: 20px;
+                justify-content: center;
+            }
+        }
     }
-  }
-  
-    
+}
+
+// Banner styles
+.home-header-banner {
+    background: linear-gradient(rgba(17, 17, 17, 0.3), rgba(0, 0, 0, 0.65)), url('../../assets/images/background-header.jpg');
+    height: 80vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+
+    // Content-up styles
+    .content-up {
+        
+        height: 50%;
+
+        // Title styles
+        .title1, .title2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: $secondaryColor;
+            margin-top: 5vh;
+        }
+
+        // Parent container styles
+        .parent-container {
+            text-align: center;
+            margin-top: 8vh;
+        }
+
+        // Search styles
+        .search {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid $secondaryColor;
+            padding: 1vh;
+            border-radius: 50px;
+            background-color: $primaryColor;
+            margin-top: 4vh;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: $searchBoxWidth;
+            margin: 0 auto;
+
+            // Search icon styles
+            i {
+                margin-right: 8px;
+                color: $secondaryColor;
+                font-size: 1.5rem;
+            }
+
+            // Input styles
+            input {
+                border: none;
+                outline: none;
+                background: transparent;
+                color: $secondaryColor;
+                font-size: 2rem;
+                width: 100%;
+                text-align: center;
+                height: auto;
+                line-height: 2.5rem;
+
+                // Placeholder styles
+                &::placeholder {
+                    color: $secondaryColor;
+                    opacity: 0.7;
+                    font-size: 1.5rem;
+                }
+            }
+
+            // Hover styles
+            &:hover {
+                background-color: #2980b9;
+            }
+        }
+    }
+
+    // Content-down styles
+    .content-down {
+        height: 50vh;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        // Options styles
+        .options {
+            display: flex;
+            gap: 20px;
+
+            // Option-child styles
+            .option-child {
+                text-align: center;
+                padding: 20px;
+                
+
+                // Icon-child styles
+                .icon-child {
+                    background: $secondaryColor;
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    text-align: center;
+                    margin: 0 auto;
+                    font-size: 2rem;
+                    color: $primaryColor;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.3s ease;
+
+                    // Hover styles
+                    &:hover {
+                        transform: scale(1.1);
+                        cursor: pointer;
+                    }
+                }
+
+                // Text-child styles
+                .text-child {
+                    margin-top: 10px;
+                    font-size: 1.2rem;
+                    color: $secondaryColor;
+                    transition: color 0.3s ease;
+
+                    // Hover styles
+                    &:hover {
+                        color: $primaryColor;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -222,7 +222,7 @@ const forgotPasswordService = (email) =>
       if (!response) {
         resolve({
           err: 1,
-          msg: "Email này chưa được đăng ký",
+          msg: "This email is not registered",
         });
       } else {
         if (response instanceof db.User) {
@@ -237,12 +237,12 @@ const forgotPasswordService = (email) =>
           resolve({
             err: 0,
             passwordTokenDate: resetToken,
-            msg: "Tin nhắn đã được gửi đến email của bạn",
+            msg: "The message has been sent to your email",
           });
         } else {
           resolve({
             err: 1,
-            msg: "Lỗi trong quá trình đặt lại mật khẩu",
+            msg: "Error during password reset",
           });
         }
       }
@@ -297,6 +297,36 @@ const resetPasswordService = async (password, token) => {
   }
 };
 
+let registerNewUser = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //check email exist
+      let check = await checkUserEmail(data.email);
+      if (check === true) {
+        resolve({
+          errCode: 1,
+          errMessage:
+            "your email is already in used, please try another email !",
+        });
+      } else {
+        let hashPasswordFromBcrypt = await hashUserPassword(data.password);
+        await db.User.create({
+          email: data.email,
+          password: hashPasswordFromBcrypt,
+          address: data.address,
+          phonenumber: data.phonenumber,
+        });
+      }
+      resolve({
+        errCode: 0,
+        errMessage: "OK",
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 module.exports = {
   handleUserLogin: handleUserLogin,
   getAllUsers: getAllUsers,
@@ -305,4 +335,5 @@ module.exports = {
   updateUserData: updateUserData,
   forgotPasswordService: forgotPasswordService,
   resetPasswordService: resetPasswordService,
+  registerNewUser: registerNewUser,
 };

@@ -44,6 +44,11 @@ let handeleCreateNewUser = async (req, res) => {
   return res.status(200).json(message);
 };
 
+let handleSignin = async (req, res) => {
+  let message = await userService.registerNewUser(req.body);
+  return res.status(200).json(message);
+};
+
 let handeleEditUser = async (req, res) => {
   let data = req.body;
   let message = await userService.updateUserData(data);
@@ -258,4 +263,5 @@ module.exports = {
   fbLogin: fbLogin,
   forgotPassword: forgotPassword,
   resetPassword: resetPassword,
+  handleSignin: handleSignin,
 };

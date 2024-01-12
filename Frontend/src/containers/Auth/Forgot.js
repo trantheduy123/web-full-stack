@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as actions from "../../store/actions";
 import "./Forgot.scss";
 import { handleLoginApi, forgotUserPassword } from "../../services/userService";
@@ -28,9 +30,15 @@ class Login extends Component {
     const response = await forgotUserPassword(email);
 
     if (response && response.err === 0) {
-      this.setState({ successMessage: response.msg }); // Set success message in state
+      this.setState({ successMessage: response.msg });
+      toast.success(response.msg, {
+        autoClose: 2000,
+      });
     } else {
-      // Handle other responses/errors as needed
+      this.setState({ errMessage: response.msg });
+      toast.error(response.msg, {
+        autoClose: 2000,
+      });
     }
   };
 
@@ -40,24 +48,28 @@ class Login extends Component {
     return (
       <div className="login-blackground">
         <div className="login-container">
-          {successMessage && (
-            <div className="success-notification">{successMessage}</div>
-          )}
-          <input
-            className="form-control"
-            placeholder="Enter your email"
-            value={this.state.email}
-            onChange={(event) => this.handleOnChangeUserEmail(event)}
-          />
-          <button
-            className="btn-login"
-            onClick={() => {
-              this.handleLogin();
-            }}
-          >
-            Send
-          </button>
+          <h2 className="user_registered-title">FORGOT PASSWORD</h2>
+          <div className="login">
+            {successMessage && (
+              <div className="success-notification">{successMessage}</div>
+            )}
+            <input
+              className="form-control"
+              placeholder="Enter your email"
+              value={this.state.email}
+              onChange={(event) => this.handleOnChangeUserEmail(event)}
+            />
+            <button
+              className="btn-login"
+              onClick={() => {
+                this.handleLogin();
+              }}
+            >
+              Send
+            </button>
+          </div>
         </div>
+        {/* React Toastify Container */}
       </div>
     );
   }

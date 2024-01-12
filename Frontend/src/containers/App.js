@@ -24,6 +24,7 @@ import HomePage from "./HomePage/HomePage";
 import { CustomToastCloseButton } from "../components/CustomToast";
 import Forgot from "./Auth/Forgot";
 import ResetPassWord from "./Auth/ResetPassWord";
+import Signup from "./Auth/Signup";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -61,6 +62,10 @@ class App extends Component {
                 <Route
                   path={path.FORGOT}
                   component={userIsNotAuthenticated(Forgot)}
+                />
+                <Route
+                  path={path.SIGNUP}
+                  component={userIsNotAuthenticated(Signup)}
                 />
                 <Route
                   path={path.SYSTEM}

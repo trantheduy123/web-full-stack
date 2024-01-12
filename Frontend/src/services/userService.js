@@ -33,6 +33,10 @@ const apiResetPassword = (data) => {
   return axios.put("/api/resetpassword", data);
 };
 
+const registerNewUser = (data) => {
+  return axios.post("/api/signin", data);
+};
+
 export {
   handleLoginApi,
   getAllUsers,
@@ -41,4 +45,5 @@ export {
   editUserService,
   forgotUserPassword,
   apiResetPassword,
+  registerNewUser,
 };
