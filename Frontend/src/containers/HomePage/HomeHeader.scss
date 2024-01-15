@@ -39,6 +39,9 @@ $searchBoxWidth: 50%;
                 margin-left: 15px;
                 cursor: pointer;
             }
+            @media only screen and (max-width: 767px) { 
+                display: none;
+            }
         }
 
         // Center content styles
@@ -56,7 +59,9 @@ $searchBoxWidth: 50%;
                 b {
                     color: #333;
                     font-size: 1.3rem;
-                  
+                    @media only screen and (max-width: 767px) { 
+                        font-size: 0.9rem;
+                    }
                 }
 
                 // Subtitle styles
@@ -64,6 +69,9 @@ $searchBoxWidth: 50%;
                     color: #777;
                     font-size: 1.2rem;
                     padding-top: 10px;
+                    @media only screen and (max-width: 767px) { 
+                        font-size: 0.7rem;
+                    }
                 }
             }
         }
@@ -73,35 +81,80 @@ $searchBoxWidth: 50%;
             display: flex;
             align-items: center;
             width: 20%;
+          
+            
 
             // Support section styles
             .support {
                 color: $primaryColor;
                 font-size: 16px;
                 cursor: pointer;
-                margin-right: 20px;
+                
+                display: flex;
+                align-items: center;
+                padding-right: 50px;
+                
+                i {
+                  margin-left: 8px;
+                  
+                }
+                @media only screen and (max-width: 767px) { 
+                    display: none;
+                 }
+                
             }
 
             // Flag section styles
-            .flag {
+            .language-vi {
                 color: #333;
                 font-size: 18px;
                 margin-right: 20px;
                 justify-content: center;
+                cursor: pointer;
+                opacity: 0.3;
+                &.active{
+                  opacity: 1;
+                  span{
+                    color: orange;
+                  }
+                }
+                &:hover{
+                  opacity: 0.7;
+                }
             }
+            .language-en {
+              color: #333;
+              font-size: 18px;
+              margin-right: 20px;
+              justify-content: center;
+              cursor: pointer;
+              opacity: 0.3;
+              &.active{
+                opacity: 1;
+                span{
+                  color: blue;
+                }
+              }
+              &:hover{
+                opacity: 0.7;
+              }
+              
+          }
         }
+      
+      
     }
 }
 
+
 // Banner styles
 .home-header-banner {
-    background: linear-gradient(rgba(17, 17, 17, 0.3), rgba(0, 0, 0, 0.65)), url('../../assets/images/background-header.jpg');
+    background: linear-gradient(rgba(17, 17, 17, 0.3), rgba(0, 0, 0, 0.7)), url('../../assets/images/background-header.jpg');
     height: 80vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     object-fit: cover;
-    padding: 15px 0;
     display: flex;
     flex-direction: column;
 
@@ -113,16 +166,32 @@ $searchBoxWidth: 50%;
         // Title styles
         .title1, .title2 {
             text-align: center;
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 15px;
             color: $secondaryColor;
-            margin-top: 5vh;
+            margin-top: 10vh;
+            word-wrap: break-word; // Add this line
+            @media only screen and (max-width: 767px) { 
+                font-size: 1.1rem;
+                margin-top: 1vh;
+                
+            }
+            @media only screen and (min-width: 768px) and (max-width: 1162px) {
+                font-size: 2.5rem;
+            }
+            
+           
         }
 
         // Parent container styles
         .parent-container {
             text-align: center;
             margin-top: 8vh;
+            @media only screen and (max-width: 767px) { 
+                
+                margin-top: 2vh;
+                
+            }
         }
 
         // Search styles
@@ -138,12 +207,17 @@ $searchBoxWidth: 50%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width: $searchBoxWidth;
             margin: 0 auto;
+            cursor: pointer;
 
             // Search icon styles
             i {
                 margin-right: 8px;
                 color: $secondaryColor;
                 font-size: 1.5rem;
+                @media only screen and (max-width: 767px) { 
+                    font-size: 0.9rem;
+                    
+                }
             }
 
             // Input styles
@@ -163,6 +237,14 @@ $searchBoxWidth: 50%;
                     color: $secondaryColor;
                     opacity: 0.7;
                     font-size: 1.5rem;
+                    @media only screen and (max-width: 767px) { 
+                        font-size: 0.9rem;
+                       
+                    }
+                }
+                @media only screen and (max-width: 767px) { 
+                    font-size: 0.9rem;
+                    
                 }
             }
 
@@ -179,6 +261,7 @@ $searchBoxWidth: 50%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(85, 85,85 , 0.5));
 
         // Options styles
         .options {
@@ -212,6 +295,11 @@ $searchBoxWidth: 50%;
                         transform: scale(1.1);
                         cursor: pointer;
                     }
+                     @media only screen and (max-width: 767px) { 
+                        margin-top: 4px;
+
+                     }
+                   
                 }
 
                 // Text-child styles
@@ -226,8 +314,48 @@ $searchBoxWidth: 50%;
                         color: $primaryColor;
                         cursor: pointer;
                     }
+                    @media only screen and (max-width: 767px) { 
+                        font-size: 0.8rem;
+
+                     }
+                }
+                @media only screen and (max-width: 767px) { 
+                   padding: 0px;
+                  
                 }
             }
+        }
+        @media only screen and (max-width: 767px) { 
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            height: 18%;
+            background-image: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .home-header-content {
+        flex-direction: column;
+     
+        // Hide left-content on smaller screens
+        .left-content {
+            display: none;
+        }
+
+
+
+        .center-content,
+        .right-content {
+            width: 100%;
+            margin-top: 15px;
+            justify-content: center;
+
+        }
+
+        .search {
+            width: 100%;
         }
     }
 }

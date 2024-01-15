@@ -1,4 +1,29 @@
 {
+
+    "homeheader": {
+        "DentalSpecialist": "Dental Specialist",
+        "SearchDoctor": "Find a Doctor by Specialty",
+        "health-facility": "Health Facility",
+        "select-room": "Select Hospital or Clinic",
+        "doctor": "Doctor",
+        "select-doctor": "Choose a Skilled Doctor",
+        "fee": "Examination Package",
+        "check-health": "General Health Checkup",
+        "support": "Support"
+    },
+    "banner": {
+        "title1": "SCHEDULE DENTAL APPOINTMENT",
+        "title2": "COMPREHENSIVE ORAL HEALTH CARE",
+        "title3": "Find a Doctor for Medical Examination",
+        "child1": "Specialized Examination",
+        "child2": "Remote Consultation",
+        "child3": "Companion Doctor",
+        "child4": "Oral Health Checkup Quiz",
+        "child5": "Service Price List"
+    },
+
+  
+
     "common": {
         "add": "Add",
         "edit": "Edit",
