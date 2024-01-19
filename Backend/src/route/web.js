@@ -24,8 +24,9 @@ let initWebRoutes = (app) => {
 
   router.post("/api/facebook", userController.fbLogin);
   router.post("/api/passwordforgot", userController.forgotPassword);
-
   router.put("/api/resetpassword", userController.resetPassword);
+
+  router.get("/allcode", userController.getAllCode);
 
   return app.use("/", router);
 };

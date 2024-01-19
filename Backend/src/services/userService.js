@@ -1,3 +1,4 @@
+import { rejects } from "assert";
 import db from "../models/index";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
@@ -327,6 +328,29 @@ let registerNewUser = (data) => {
   });
 };
 
+let getAllCodeService = (typeInput) => {
+  return new Promise(async (resolve, rejects) => {
+    try {
+      if (!typeInput) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing required parameters !",
+        });
+      } else {
+        let res = {};
+        let allcode = await db.Allcode.findAll({
+          where: { type: typeInput },
+        });
+        res.errCode = 0;
+        res.data = allcode;
+        resolve(res);
+      }
+    } catch (e) {
+      rejects(e);
+    }
+  });
+};
+
 module.exports = {
   handleUserLogin: handleUserLogin,
   getAllUsers: getAllUsers,
@@ -336,4 +360,5 @@ module.exports = {
   forgotPasswordService: forgotPasswordService,
   resetPasswordService: resetPasswordService,
   registerNewUser: registerNewUser,
+  getAllCodeService: getAllCodeService,
 };
