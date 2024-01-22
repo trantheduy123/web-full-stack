@@ -37,6 +37,10 @@ const registerNewUser = (data) => {
   return axios.post("/api/signin", data);
 };
 
+const getAllCodeService = (inputType) => {
+  return axios.get(`/api/allcode?type=${inputType}`);
+};
+
 export {
   handleLoginApi,
   getAllUsers,
@@ -46,4 +50,5 @@ export {
   forgotUserPassword,
   apiResetPassword,
   registerNewUser,
+  getAllCodeService,
 };

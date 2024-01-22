@@ -26,7 +26,7 @@ let initWebRoutes = (app) => {
   router.post("/api/passwordforgot", userController.forgotPassword);
   router.put("/api/resetpassword", userController.resetPassword);
 
-  router.get("/allcode", userController.getAllCode);
+  router.get("/api/allcode", userController.getAllCode);
 
   return app.use("/", router);
 };

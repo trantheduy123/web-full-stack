@@ -69,6 +69,20 @@
                         }
                     }
                 }
+                &.active {
+                    a {
+                        color: blue;
+                        transition: color 0.3s ease; /* Add a smooth transition for color change */
+                    }
+                    background-color: #ededed;
+                    
+                    &:hover {
+                        a {
+                            color: royalblue; /* Change to a different color on hover */
+                        }
+                        background-color: #c0c0c0; /* Change to a different background color on hover */
+                    }
+                }
                 &.active span {
                     font-weight: 500;
                     color: $colormain;

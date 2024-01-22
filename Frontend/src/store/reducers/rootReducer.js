@@ -8,6 +8,7 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { useReducer } from "react";
+import adminReducer from "./adminReducer";
 
 // Common configuration for redux-persist
 const persistCommonConfig = {
@@ -33,8 +34,8 @@ const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     user: persistReducer(userPersistConfig, userReducer),
-
     app: persistReducer(appPersistConfig, appReducer),
+    admin: adminReducer,
   });
 
 export default rootReducer;

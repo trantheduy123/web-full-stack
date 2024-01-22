@@ -6,37 +6,43 @@ import Navigator from "../../components/Navigator";
 import { adminMenu } from "./menuApp";
 import "./Header.scss";
 import { LANGUAGES } from "../../utils";
-
+import { FormattedMessage } from "react-intl";
 class Header extends Component {
   handleChangeLanguage = (language) => {
     this.props.changeLanguegeAppRedux(language);
   };
   render() {
-    const { processLogout, language } = this.props;
+    const { processLogout, language, userInfo } = this.props;
+    console.log("check userinfo", userInfo);
 
     return (
       <div className="header-container">
         {/* thanh navigator */}
-        <div className="header-tabs-container">
+        <h6 className="header-tabs-container">
           <Navigator menus={adminMenu} />
-        </div>
+        </h6>
         <div className="languages">
-          <span
+          <h4 className="welcome">
+            {" "}
+            <FormattedMessage id="homeheader.welcome" />{" "}
+            {userInfo && userInfo.firstName ? userInfo.firstName : ""} !{" "}
+          </h4>
+          <h5
             className={
               language === LANGUAGES.VI ? "languages-vi active" : "languages-vi"
             }
             onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}
           >
             VN
-          </span>
-          <span
+          </h5>
+          <h5
             className={
               language === LANGUAGES.EN ? "languages-en active" : "languages-en"
             }
             onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
           >
             EN
-          </span>
+          </h5>
           <div
             className="btn btn-logout"
             onClick={processLogout}
@@ -55,6 +61,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
     language: state.app.language,
   };
 };
