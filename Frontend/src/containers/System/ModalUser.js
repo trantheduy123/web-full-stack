@@ -110,7 +110,7 @@ class ModalUser extends Component {
       <div>
         <Button
           color="primary"
-          className="btn btn-primary px-2"
+          className="btn btn-primary px-2 mt-5"
           onClick={this.toggle}
         >
           <i className="fas fa-plus"></i> Add new user

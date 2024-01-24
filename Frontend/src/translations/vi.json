@@ -62,10 +62,12 @@
        "phone-number": "Số Điện Thoại",
        "gender": "Giới tính",
        "address": "Địa chỉ",
-       "save": "Lưu",
+       "save": "Lưu user",
        "position": "Chức danh",
        "role": "Vai trò",
-       "image": " Hình ảnh"
+       "image": " Hình ảnh",
+       "edit": "Lưu thay đổi"
+       
     }
   
 }

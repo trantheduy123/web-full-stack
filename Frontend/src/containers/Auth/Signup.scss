@@ -227,29 +227,45 @@
     }
   }
   
-  @media screen and (max-width: 990px) {
-    .user_options-forms {
-      min-height: 350px;
-  
-      .forms_buttons {
-        flex-direction: column;
-      }
-  
-      .user_forms-login {
-        .forms_buttons-action {
-          margin-top: 30px;
+  @media screen and (max-width: 480px) {
+    .user_options-container{
+      .user_options-text{
+          .user_registered-title, .user_unregistered-title{
+            font-size: 1.5rem;
+          }
+          .user_registered-login{
+            font-size: 0.9rem;
+          }
+        .user_options-registered {
+          padding: 70px 20px;
         }
       }
-  
-      .user_forms-signup,
-      .user_forms-login {
-        top: 40px;
+      .user_options-forms {
+        min-height: 610px;
+        width: calc(80% - 38px);
+        left: -90px ;
+        .forms_buttons {
+          flex-direction: column;
+        }
+    
+        .user_forms-login {
+          .forms_buttons-action {
+            margin-top: 30px;
+          }
+        }
+    
+        .user_forms-signup,
+        .user_forms-login {
+          top: 40px;
+        }
       }
     }
   
-    .user_options-registered,
-    .user_options-unregistered {
-      padding: 50px 45px;
+  
+    .user_registered-text {
+      display: none; // Hide instead of setting visibility to hidden
     }
+  
+    
   }
   

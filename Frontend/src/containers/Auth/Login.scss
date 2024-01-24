@@ -132,6 +132,7 @@ input {
   padding: 75px 45px;
   color: $white;
   font-weight: $ff-light;
+  
 }
 
 .user_registered-title,
@@ -328,28 +329,46 @@ input {
 /**
  * Responsive 990px
  */
-@media screen and (max-width: 990px) {
-  .user_options-forms {
-    min-height: 350px;
-
-    .forms_buttons {
-      flex-direction: column;
-    }
-
-    .user_forms-login {
-      .forms_buttons-action {
-        margin-top: 30px;
+ @media screen and (max-width: 480px) {
+  .user_options-container{
+    .user_options-text{
+        .user_registered-title, .user_unregistered-title{
+          font-size: 1.5rem;
+        }
+        .user_unregistered-signup{
+          font-size: 0.9rem;
+        }
+      .user_options-unregistered {
+        padding: 50px 11px; // Your updated padding values
+        width: 20%;
       }
     }
-
-    .user_forms-signup,
-    .user_forms-login {
-      top: 40px;
+    .user_options-forms {
+      min-height: 450px;
+      width: calc(80% - 38px);
+      left: -90px ;
+      .forms_buttons {
+        flex-direction: column;
+      }
+  
+      .user_forms-login {
+        .forms_buttons-action {
+          margin-top: 30px;
+        }
+      }
+  
+      .user_forms-signup,
+      .user_forms-login {
+        top: 40px;
+      }
     }
   }
 
-  .user_options-registered,
-  .user_options-unregistered {
-    padding: 50px 45px;
+
+  .user_unregistered-text {
+    display: none; // Hide instead of setting visibility to hidden
   }
+
+  
 }
+

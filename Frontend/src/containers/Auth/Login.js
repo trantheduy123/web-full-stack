@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import "./Login.scss";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 import { handleLoginApi } from "../../services/userService";
 
@@ -103,16 +103,6 @@ class Login extends Component {
               >
                 Sign up
               </a>
-            </div>
-
-            <div className="user_options-registered">
-              <h2 className="user_registered-title">Have an account?</h2>
-              <p className="user_registered-text">
-                Log in to get online service consultation
-              </p>
-              <button className="user_registered-login" id="login-button">
-                Login
-              </button>
             </div>
           </div>
 

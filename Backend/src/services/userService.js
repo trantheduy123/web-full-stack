@@ -117,8 +117,9 @@ let createNewUser = (data) => {
           lastName: data.lastName,
           address: data.address,
           phonenumber: data.phonenumber,
-          gender: data.gender === "1" ? true : false,
+          gender: data.gender,
           roleId: data.roleId,
+          positionId: data.positionId,
         });
       }
 
@@ -133,33 +134,30 @@ let createNewUser = (data) => {
 };
 
 let deleteUser = async (userId) => {
-  try {
-    let foundUser = await db.User.findOne({
-      where: { id: userId },
-    });
+  return new Promise(async (resolve, reject) => {
+    try {
+      let foundUser = await db.User.findOne({
+        where: { id: userId },
+      });
 
-    if (!foundUser) {
-      return {
-        errCode: 2,
-        errMessage: "The user doesn't exist",
-      };
+      if (!foundUser) {
+        resolve({
+          errCode: 2,
+          errMessage: "The user doesn't exist",
+        });
+      }
+
+      await db.User.destroy({
+        where: { id: userId },
+      });
+      resolve({
+        errCode: 0,
+        errMessage: "The user is deleted",
+      });
+    } catch (error) {
+      reject(error);
     }
-
-    await db.User.destroy({
-      where: { id: userId },
-    });
-
-    return {
-      errCode: 0,
-      errMessage: "The user is deleted",
-    };
-  } catch (error) {
-    console.error("Error deleting user:", error);
-    throw {
-      errCode: 500,
-      errMessage: "Internal Server Error",
-    };
-  }
+  });
 };
 
 const hashPassword = (password) =>
@@ -192,6 +190,7 @@ let updateUserData = (data) => {
         user.phonenumber = data.phonenumber;
         user.roleId = data.roleId;
         user.gender = data.gender;
+        user.positionId = data.positionId;
 
         // Save the updated user
         await user.save();
