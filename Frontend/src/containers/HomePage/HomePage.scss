@@ -52,14 +52,15 @@
              background-color: #fff; 
             }
             &.section-outstanding-doctor {
-                background-image: url('../../assets/outstanding-doctor/logo-doctor.png');
+              //  background-image: url('../../assets/outstanding-doctor/logo-doctor.png');
                 background-position: center center;
                  background-repeat: no-repeat;
                  background-size: cover;
                  width: 120px;
                  height: 120px;
                  border-radius: 50%;
-             background-color: #fff; 
+                background-color: #fff; 
+                transition: box-shadow 0.3s ease, transform 0.3s ease;
             }
             &.section-handbook {
                 background-image: url('../../assets/handbook/cam-nang-1.png');
@@ -72,6 +73,7 @@
               &:hover {
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
                 cursor: pointer;
+                transform: scale(1.05);
               }
             }
         
@@ -181,10 +183,13 @@
 }
 
 .section-outstanding-doctor {
+    
+    align-items: center;  // Center vertically
+    justify-content: center;  // Center horizontally
     .outer-bg{
         display: flex;
         justify-content: center;
-        
+      
     }
     .section-customize{
         padding: 5px;
@@ -193,7 +198,18 @@
             border: 1px solid orange;
             padding: 20px ;
         }
+        .position {
+            text-align: center;
+            
+            .bg-image-text {
+              
+              font-weight: bold;
+              color: #333; // Set your desired text color
+              text-align: center;
+            }
+          }
     }
+  
 }
 
 .home-footer{
