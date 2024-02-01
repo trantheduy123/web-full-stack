@@ -68,7 +68,11 @@
         "role": "Role",
         "image": "Image",
         "edit": "Edit user"
-      }
+      },
+      "homepage": {
+        "outstanding-doctor": "Outstanding Doctors of the Week",
+        "more-info": "See More"
+    }
       
    
 }
