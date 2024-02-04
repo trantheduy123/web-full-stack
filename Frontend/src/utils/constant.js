@@ -7,6 +7,7 @@ export const path = {
   LOG_OUT: "/logout",
   RESETPASSWORD: "/resetpassword/:token",
   SYSTEM: "/system",
+  DETAIL_DOCTOR: "/detail-doctor/:id",
 };
 
 export const LANGUAGES = {

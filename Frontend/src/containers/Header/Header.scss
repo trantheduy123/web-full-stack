@@ -12,6 +12,12 @@ $base-size: 16px; // Replace with your base font size
   height: 60px; // Increase the height for better visibility
   padding: 0 20px; // Add horizontal padding for better spacing
   position: relative;
+  width: -webkit-fill-available;
+  .navigator-menu .menu-group:hover .menu-list {
+     
+    display: inline-grid;
+}
+ 
 
   .btn-logout {
     color: $common-text-color;
@@ -65,9 +71,19 @@ $base-size: 16px; // Replace with your base font size
     display: inline-block;
     .navigator-menu .menu-group .menu-group-name {
         line-height: 20px;
-      
+        font-size: smaller;
         border-right: 1px solid #ccc;
     }
+    .navigator-menu .menu-group:hover{
+      cursor: pointer;
+    background-color: #0062a1;
+    z-index: 50;
+    }
+    .navigator-menu .menu-group:hover .menu-list {
+     
+      display: inline-grid;
+  }
+   
     .btn-logout {
       margin-top: 10px;
       width: 100%; // Full width button
