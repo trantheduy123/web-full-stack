@@ -7,6 +7,7 @@ import "./Login.scss";
 import { toast } from "react-toastify";
 
 import { handleLoginApi } from "../../services/userService";
+import { USER_ROLE } from "../../utils";
 
 class Login extends Component {
   constructor(props) {
@@ -57,6 +58,11 @@ class Login extends Component {
         });
 
         this.props.userLoginSuccess(data.user);
+
+        // Redirect user with role R3 to "/home"
+        if (data.user && data.user.roleId === USER_ROLE.PATIENT) {
+          this.props.navigate("/home");
+        }
       }
     } catch (error) {
       if (error.response) {

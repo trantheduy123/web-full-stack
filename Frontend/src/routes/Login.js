@@ -11,6 +11,8 @@ import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 
 import adminService from "../services/adminService";
+import { userLoginSuccess } from "../store/actions";
+import { USER_ROLE } from "../utils"; // Adjust the path accordingly
 
 class Login extends Component {
   constructor(props) {
@@ -43,9 +45,18 @@ class Login extends Component {
   };
 
   redirectToSystemPage = () => {
-    const { navigate } = this.props;
-    const redirectPath = "/system/user-manage";
-    navigate(`${redirectPath}`);
+    const { navigate, user } = this.props;
+    if (user && user.roleId === USER_ROLE.PATIENT) {
+      navigate("/home");
+    } else {
+      navigate("/system/user-manage");
+    }
+  };
+  handleKeyDown = (event) => {
+    console.log("duy check ", event);
+    if (event.key === "Enter") {
+      this.adminLoginSuccess();
+    }
   };
 
   processLogin = () => {
@@ -75,24 +86,23 @@ class Login extends Component {
   };
 
   handlerKeyDown = (event) => {
-    const keyCode = event.which || event.keyCode;
+    const keyCode = event.key || event.keyCode;
     if (keyCode === KeyCodeUtils.ENTER) {
       event.preventDefault();
       if (!this.btnLogin.current || this.btnLogin.current.disabled) return;
+      this.processLogin();
       this.btnLogin.current.click();
     }
+    this.processLogin();
+    console.log(event);
   };
 
   componentDidMount() {
-    document.addEventListener("keydown", this.handlerKeyDown);
+    document.addEventListener("Enter", this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.handlerKeyDown);
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
+    document.removeEventListener("Enter", this.handlerKeyDown);
   }
 
   render() {
@@ -119,6 +129,7 @@ class Login extends Component {
                 className="form-control"
                 value={username}
                 onChange={this.onUsernameChange}
+                onKeyDown={(event) => this.handlerKeyDown(event)}
               />
             </div>
 
@@ -135,6 +146,7 @@ class Login extends Component {
                 className="form-control"
                 value={password}
                 onChange={this.onPasswordChange}
+                onKeyDown={(event) => this.handlerKeyDown(event)}
               />
             </div>
 
@@ -152,6 +164,7 @@ class Login extends Component {
                 className="btn"
                 value={LanguageUtils.getMessageByKey("login.login", lang)}
                 onClick={this.processLogin}
+                onKeyDown={(event) => this.handlerKeyDown(event)}
               />
             </div>
           </div>

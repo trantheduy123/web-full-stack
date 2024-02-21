@@ -1,14 +1,74 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
-
+import Select from "react-select";
 import { connect } from "react-redux";
 import "./HomeHeader.scss";
 import { LANGUAGES } from "../../utils";
 import { changeLanguegeApp } from "../../store/actions";
+import { withRouter } from "react-router";
+import * as actions from "../../store/actions";
 
 class HomeHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOptions: "",
+      listDoctors: [],
+      arrDoctor: [],
+    };
+  }
+
+  componentDidMount() {
+    this.props.fetchAllDoctor();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.allDoctors !== this.props.allDoctors) {
+      let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+      this.setState({
+        listDoctors: dataSelect,
+      });
+    }
+    if (prevProps.language !== this.props.language) {
+      let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+      this.setState({
+        listDoctors: dataSelect,
+      });
+    }
+  }
+
+  buildDataInputSelect = (inputData) => {
+    let result = [];
+    let { language } = this.props;
+    if (inputData && inputData.length > 0) {
+      inputData.map((item, index) => {
+        let object = {};
+        let labelVi = `${item.lastName} ${item.firstName}`;
+        let labelEn = `${item.firstName} ${item.lastName}`;
+
+        object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+        object.value = item.id;
+        result.push(object);
+      });
+    }
+    return result;
+  };
+
   changeLanguage = (language) => {
     this.props.changeLanguegeAppRedux(language);
+  };
+
+  handleChange = (doctor) => {
+    this.setState({ doctor }, () =>
+      console.log(`Option selected:`, this.state.doctor)
+    );
+    this.props.history.push(`/detail-doctor/${doctor.value}`);
+  };
+
+  returnToHome = () => {
+    if (this.props.history) {
+      this.props.history.push("/home");
+    }
   };
 
   render() {
@@ -19,8 +79,7 @@ class HomeHeader extends Component {
         <div className="home-header-container">
           <div className="home-header-content">
             <div className="left-content">
-              <i className="fas fa-bars"></i>
-              <div className="header-logo"></div>
+              <div className="header-logo" onClick={this.returnToHome}></div>
             </div>
             <div className="center-content">
               <div className="child-content">
@@ -108,8 +167,12 @@ class HomeHeader extends Component {
               <div className="parent-container">
                 <div className="search">
                   <i className="fas fa-search"></i>
-                  <input
-                    type="text"
+
+                  <Select
+                    className="search-doctor"
+                    value={this.state.selectedOptions}
+                    onChange={this.handleChange}
+                    options={this.state.listDoctors}
                     placeholder="Tìm bác sĩ theo chuyên khoa"
                   />
                 </div>
@@ -182,13 +245,17 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
     language: state.app.language,
+    allDoctors: state.admin.allDoctors,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchAllDoctor: () => dispatch(actions.fetchAllDoctor()),
     changeLanguegeAppRedux: (language) => dispatch(changeLanguegeApp(language)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomeHeader)
+);

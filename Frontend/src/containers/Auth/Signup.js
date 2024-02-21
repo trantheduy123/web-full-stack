@@ -145,7 +145,7 @@ class Signup extends Component {
     }
   };
   render() {
-    const isHidden = this.state.roleId === "3";
+    const isHidden = this.state.roleId === "R3";
     return (
       <div className="user">
         <div className="user_options-container">
@@ -274,11 +274,11 @@ class Signup extends Component {
                       onChange={(e) => {
                         this.handleOnChangeInput(e, "roleId");
                       }}
-                      value="3" // Always set the value to "3"
+                      value="R3" // Always set the value to "3"
                     >
-                      <option value="3">Patient</option>
-                      <option value="2">Admin</option>
-                      <option value="1">Doctor</option>
+                      <option value="R3">Patient</option>
+                      <option value="R2">Admin</option>
+                      <option value="R1">Doctor</option>
                     </select>
                   </div>
                 </div>
