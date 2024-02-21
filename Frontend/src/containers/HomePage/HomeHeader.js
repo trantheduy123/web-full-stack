@@ -173,7 +173,9 @@ class HomeHeader extends Component {
                     value={this.state.selectedOptions}
                     onChange={this.handleChange}
                     options={this.state.listDoctors}
-                    placeholder="Tìm bác sĩ theo chuyên khoa"
+                    placeholder={
+                      <FormattedMessage id="patient.detail-doctor.search-doctor" />
+                    }
                   />
                 </div>
               </div>

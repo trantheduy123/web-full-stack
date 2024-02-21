@@ -87,9 +87,27 @@
             "schedule": "Schedule",
             "no-schedule": "The doctor does not have an appointment at this time, please choose another time!",
             "choose": "choose ",
-            "book-free": " and book (free)"
+            "book-free": " and book (free)",
+            "search-doctor": "Search doctors by specialty"
         }
+
+    },
+    "admin": {
+    
+"manage-doctor": {
+    "title": "Add Doctor Information",
+    "select-doctor": "Select Doctor",
+    "intro": "Introduction Information",
+    "add": "Add Information",
+    "save": "Save Information",
+    "price": "Consultation Fee",
+    "payment": "Payment Method",
+    "province": "Province",
+    "nameClinic": "Clinic Name",
+    "addressClinic": "Clinic Address",
+    "note": "Note"
     }
+}
       
    
 }
