@@ -104,7 +104,6 @@ class ModalUser extends Component {
   handleEditUser = () => {
     const { item } = this.props;
 
-    console.log("Edit user:", item);
     let isValid = this.checkValidInput();
     if (isValid === true) {
       this.props.editUser(this.state);

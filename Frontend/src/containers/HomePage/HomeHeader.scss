@@ -58,7 +58,7 @@ $searchBoxWidth: 50%;
                 // Bold text styles
                 b {
                     color: #333;
-                    font-size: 1.3rem;
+                    font-size: large;
                     @media only screen and (max-width: 767px) { 
                         font-size: 0.9rem;
                     }
@@ -67,7 +67,7 @@ $searchBoxWidth: 50%;
                 // Subtitle styles
                 .subs-title {
                     color: #777;
-                    font-size: 1.2rem;
+                    font-size: normal;
                     padding-top: 10px;
                     @media only screen and (max-width: 767px) { 
                         font-size: 0.7rem;

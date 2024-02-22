@@ -53,7 +53,6 @@ class Login extends Component {
     }
   };
   handleKeyDown = (event) => {
-    console.log("duy check ", event);
     if (event.key === "Enter") {
       this.adminLoginSuccess();
     }

@@ -114,7 +114,7 @@ class ManageSchedule extends Component {
 
     if (rangeTime && rangeTime.length > 0) {
       let selectedTime = rangeTime.filter((item) => item.isSlected === true);
-      console.log("duy check selectedtime", selectedTime);
+
       if (selectedTime && selectedTime.length > 0) {
         selectedTime.map((schedule) => {
           let object = {};
@@ -123,7 +123,6 @@ class ManageSchedule extends Component {
           object.timeType = schedule.keyMap;
           result.push(object);
         });
-        console.log("duy check selectedtime", result);
 
         // Save was successful, show success message
         toast.success("Schedule saved successfully!");
@@ -138,9 +137,6 @@ class ManageSchedule extends Component {
       doctorId: selectedDoctor.value,
       formatedDate: formatedDate,
     });
-    console.log("check saveBulkScheduleDoctor", res);
-
-    console.log("duy check selectedtime", result);
   };
   render() {
     console.log("tran the duy check state", this.state);

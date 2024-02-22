@@ -89,6 +89,25 @@
             "choose": "choose ",
             "book-free": " and book (free)",
             "search-doctor": "Search doctors by specialty"
+        },
+        "extra-infor-doctor": {
+            "text-address": "Address for examination",
+            "price": "EXAMINATION FEE:",
+            "detail": "View details",
+            "payment": "Patients can pay fees by the following methods:",
+            "hide-price": "Hide price list"
+        },
+        "booking-modal": {
+            "title": "Booking Information",
+            "fullname": "Full Name",
+            "phonenumber": "Phone Number",
+            "address": "Address",
+            "reason": "Reason for Appointment",
+            "birthday": "Date of Birth",
+            "gender": "Gender",
+            "btnConfirm": "Confirm",
+            "btnCancle": "Cancel",
+            "price-booking":"Free booking"
         }
 
     },

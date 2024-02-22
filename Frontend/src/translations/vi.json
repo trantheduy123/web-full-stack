@@ -89,7 +89,29 @@
             "choose": "chọn ",
             "book-free": " và đặt (miễn phí)",
             "search-doctor": "Tìm bác sĩ khám theo chuyên khoa"
+        },
+        "extra-infor-doctor":{
+            "text-address":"Địa chỉ khám",
+            "price": "GIÁ KHÁM:",
+            "detail": "Xem chi tiết",
+            "payment": "Người khám bệnh có thể thanh toán chi phí bằng hình thức:",
+            "hide-price": "Ẩn bảng giá"
+        },
+        "booking-modal":{
+            "title": "Thông tin đặt lịch khám bệnh",
+            "fullname":"Họ và tên",
+            "phonenumber": "Số điện thoại",
+            "address": "Địa chỉ liên hệ",
+            "reason": "Lí do khám",
+            "birthday":"Ngày sinh",
+            "gender": "Giới tính",
+            "btnConfirm": "Xác nhận",
+            "btnCancle":    "Hủy",
+            "price-booking":"Miễn phí đặt lịch"
+
         }
+
+
     },
     "admin": {
         "manage-doctor": {
