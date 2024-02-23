@@ -38,6 +38,10 @@
                 .menu-link {
                     text-decoration: none;
                     color: $text-in-light;
+                    width: 205px;
+                    display: block;
+                    width: 100%; 
+                   
                 }
                 .sub-menu-list {
                     display: none;
@@ -48,6 +52,8 @@
                     top: 0;
                     left: 205px;
                     padding: 0;
+                    display: block;
+                    width: 100%; 
                     .sub-menu {
                         padding: 0 15px;
                         height: 35px;
