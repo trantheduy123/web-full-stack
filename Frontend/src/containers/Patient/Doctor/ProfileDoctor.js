@@ -47,8 +47,6 @@ class ProfileDoctor extends Component {
   renderTimeBooking = (dataTime) => {
     let { language } = this.props;
     if (dataTime && !_.isEmpty(dataTime)) {
-      console.log("data time check", dataTime);
-
       let time =
         language === LANGUAGES.VI
           ? dataTime.timeTypeData.valueVi

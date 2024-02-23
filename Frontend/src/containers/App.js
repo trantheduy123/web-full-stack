@@ -28,6 +28,7 @@ import Signup from "./Auth/Signup";
 import CustomScrollbars from "../components/CustomScrollbars";
 import DetailDoctor from "./Patient/Doctor/DetailDoctor";
 import Doctor from "../routes/Doctor";
+import VerifyEmail from "./Patient/VerifyEmail";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -84,6 +85,10 @@ class App extends Component {
                     component={ResetPassWord}
                   />
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                  <Route
+                    path={path.VERIFY_EMAIL_BOOKING}
+                    component={VerifyEmail}
+                  />
                 </Switch>
               </CustomScrollbars>
             </div>
