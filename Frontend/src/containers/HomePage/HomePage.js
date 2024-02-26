@@ -9,7 +9,8 @@ import "slick-carousel/slick/slick-theme.css";
 import OutStandingDoctor from "./Section/OutStandingDoctor";
 import HandBook from "./Section/HandBook";
 import About from "./Section/About";
-import HomeFooter from "./HomeFooter";
+
+import Footer from "../Footer/footer";
 class HomePage extends Component {
   render() {
     let settings = {
@@ -46,7 +47,8 @@ class HomePage extends Component {
         <OutStandingDoctor settings={settings} />
         <HandBook settings={settings} />
         <About />
-        <HomeFooter />
+
+        <Footer />
       </div>
     );
   }

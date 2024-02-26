@@ -2,7 +2,7 @@
 
     "homeheader":{
         "DentalSpecialist": "Chuyên Khoa Răng",
-        "SearchDoctor": "Tìm bác sĩ theo chuyên khoa",
+        "SearchDoctor": "Tìm dịch vụ theo chuyên khoa",
         "health-facility": "Cơ sở y tế",
         "select-room": "Chọn bệnh viện phòng khám",
         "doctor": "Bác sĩ",
@@ -74,7 +74,8 @@
     },
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
-        "more-info": "Xem thêm"
+        "more-info": "Xem thêm",
+        "specialty-popular": "Chuyên khoa phổ biến"
     },
     "manage-schedule": {
         "title": "Quản lí khám bệnh bác sĩ",
@@ -112,6 +113,13 @@
         }
 
 
+    },
+    "footer":{
+        "title1":"Chúng tôi là một phòng khám nha khoa hàng đầu, cam kết cung cấp dịch vụ chăm sóc răng miệng chất lượng cao và đáng tin cậy. Với đội ngũ bác sĩ nha khoa giàu kinh nghiệm và thân thiện, chúng tôi đặt mục tiêu đem lại nụ cười tươi sáng và sức khỏe răng miệng tốt cho mỗi bệnh nhân.",
+        "title2":"Chúng tôi tự hào về việc áp dụng công nghệ tiên tiến nhất và phương pháp điều trị hiện đại để đảm bảo mọi người đều có trải nghiệm nha khoa thoải mái và hiệu quả. Hãy đến với chúng tôi để trải nghiệm dịch vụ tận tâm và chuyên nghiệp nhất trong việc duy trì và cải thiện sức khỏe răng miệng của bạn.",
+        "contact":"Liên hệ ngay",
+        "about":"Về chúng tôi",
+        "info":"Thông tin"
     },
     "admin": {
         "manage-doctor": {

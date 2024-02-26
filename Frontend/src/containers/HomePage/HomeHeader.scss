@@ -150,7 +150,6 @@ $searchBoxWidth: 50%;
 // Banner styles
 .home-header-banner {
     background: linear-gradient(rgba(17, 17, 17, 0.3), rgba(0, 0, 0, 0.7)), url('../../assets/images/background-header.jpg');
-    height: 80vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -161,7 +160,7 @@ $searchBoxWidth: 50%;
     // Content-up styles
     .content-up {
         
-        height: 50%;
+        height: 30%;
 
         // Title styles
         .title1, .title2 {
@@ -205,7 +204,7 @@ $searchBoxWidth: 50%;
             background-color: $primaryColor;
             margin-top: 4vh;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: $searchBoxWidth;
+            width: 50%;
             margin: 0 auto;
             cursor: pointer;
 
@@ -348,7 +347,11 @@ $searchBoxWidth: 50%;
             display: none;
         }
 
-
+        .home-header-banner{
+            .search{
+                width: 80%;
+            }
+        }
 
         .center-content,
         .right-content {

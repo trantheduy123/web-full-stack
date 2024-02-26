@@ -74,7 +74,8 @@
       },
       "homepage": {
         "outstanding-doctor": "Outstanding Doctors of the Week",
-        "more-info": "See More"
+        "more-info": "See More",
+        "specialty-popular": "Popular Specialties"
     },
     "manage-schedule": {
         "title": "Doctor Appointment Management",
@@ -111,6 +112,14 @@
         }
 
     },
+    
+"footer":{
+    "title1":"We are a leading dental clinic, committed to providing high-quality and reliable dental care services. With experienced and friendly dental team, we aim to bring bright smiles and good oral health to each patient.",
+    "title2":"We pride ourselves on applying the most advanced technology and modern treatment methods to ensure everyone has a comfortable and effective dental experience. Come to us to experience the most caring and professional service in maintaining and improving your oral health.",
+    "contact":"Contact US",
+    "about":"About US","info":"Information"
+    },
+
     "admin": {
     
 "manage-doctor": {

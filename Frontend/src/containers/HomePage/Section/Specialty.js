@@ -7,43 +7,57 @@ import Slider from "react-slick";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import niengRangImage from "../../../assets/specialty/nieng-rang.jpg";
+
+import { getAllSpecialty } from "../../../services/userService";
 
 class Specialty extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSpecialty: [],
+    };
+  }
+
+  async componentDidMount() {
+    let res = await getAllSpecialty();
+    if (res && res.errCode === 0) {
+      this.setState({
+        dataSpecialty: res.data ? res.data : [],
+      });
+    }
+  }
+
   render() {
+    let { dataSpecialty } = this.state;
     return (
       <div className="section-share section-specialty">
         <div className="section-container">
           <div className="section-header">
-            <span className="title-section">Chuyên Khoa Phổ Biến</span>
-            <button className="btn-section">Xem thêm</button>
+            <span className="title-section">
+              {" "}
+              <FormattedMessage id="homepage.specialty-popular" />
+            </span>
+            <button className="btn-section">
+              <FormattedMessage id="homepage.more-info" />
+            </button>
           </div>
           <div className="section-body">
             <Slider {...this.props.settings}>
-              <div className="section-customize">
-                <div className="section-specialty bg-image" />
-                <div className="bg-image-text"> Nieng Rang 1</div>
-              </div>
-              <div className="section-customize">
-                <div className="section-specialty bg-image" />
-                <div className="bg-image-text"> Nieng Rang 2</div>
-              </div>
-              <div className="section-customize">
-                <div className="section-specialty bg-image" />
-                <div className="bg-image-text"> Nieng Rang 3</div>
-              </div>
-              <div className="section-customize">
-                <div className="section-specialty bg-image" />
-                <div className="bg-image-text"> Nieng Rang 4</div>
-              </div>
-              <div className="section-customize">
-                <div className="section-specialty bg-image" />
-                <div className="bg-image-text"> Nieng Rang 5</div>
-              </div>
-              <div className="section-customize">
-                <div className="section-specialty bg-image" />
-                <div className="bg-image-text"> Nieng Rang 6</div>
-              </div>
+              {dataSpecialty &&
+                dataSpecialty.length > 0 &&
+                dataSpecialty.map((item, index) => {
+                  return (
+                    <div className="section-customize" key={index}>
+                      <div
+                        className="section-specialty bg-image "
+                        style={{
+                          backgroundImage: `url(${item.image})`,
+                        }}
+                      />
+                      <div className="bg-image-text">{item.name}</div>
+                    </div>
+                  );
+                })}
             </Slider>
           </div>
         </div>

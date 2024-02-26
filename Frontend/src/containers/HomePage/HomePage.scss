@@ -188,6 +188,8 @@
             }
 }
 
+
+
 .section-outstanding-doctor {
     
     align-items: center;  // Center vertically
@@ -224,27 +226,50 @@
 
 }
 
-.section-about{
-    padding: 0 10px;
-    .section-about-header{
-        padding: 20px 10px;
-        font-size: 20px;
-        font-weight: 600;
-    }
-    .section-about-content{
-        display: flex;
-        gap:15px;
-        width: 100%;
-        .content-right{
-            width: 60%;
-            p{
-                text-align: justify;
-                font-size: italic;
-                padding: 15px;
-            }
-        }
-        .content-left{
-            width: 40%;
-        }
-    }
+.section-share.section-about, .section-specialty.section-about {
+    height: 735px !important;
 }
+.section-about {
+    padding: 0 10px;
+  
+    .section-about-header {
+      padding: 20px 10px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  
+    .section-about-content {
+      display: flex;
+      flex-wrap: wrap;
+  
+      .content-right {
+        width: 100%;
+  
+        p {
+          text-align: justify;
+          font-size: medium;
+          padding: 15px;
+          margin-top: 0px;
+        }
+      }
+  
+      .content-left {
+        width: 100%;
+      }
+    }
+  
+    @media only screen and (min-width: 768px) {
+      
+      .section-about-content {
+        flex-wrap: nowrap;
+  
+        .content-right {
+          width: 65%;
+        }
+  
+        .content-left {
+          width: 35%;
+        }
+      }
+    }
+  }

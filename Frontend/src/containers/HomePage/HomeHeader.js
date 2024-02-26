@@ -192,17 +192,7 @@ class HomeHeader extends Component {
                   </div>
                 </div>
               </div>
-              <div className="options">
-                <div className="option-child">
-                  <div className="icon-child">
-                    <i className="fas fa-globe"></i>
-                  </div>
-                  <div className="text-child">
-                    {" "}
-                    <FormattedMessage id="banner.child2" />
-                  </div>
-                </div>
-              </div>
+
               <div className="options">
                 <div className="option-child">
                   <div className="icon-child">
