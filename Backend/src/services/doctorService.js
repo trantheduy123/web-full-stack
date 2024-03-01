@@ -58,23 +58,43 @@ let getAllDoctors = () => {
   });
 };
 
+let checkRequiredFields = (inputData) => {
+  let arrFields = [
+    "doctorId",
+    "contentHTML",
+    "contentMarkdown",
+    "action",
+    "selectedPrice",
+    "selectedPayment",
+    "selectedProvince",
+    "nameClinic",
+    "addressClinic",
+    "specialtyId",
+  ];
+
+  let isValid = true;
+  let element = "";
+  for (let i = [0]; i < arrFields.length; i++) {
+    if (inputData[arrFields[i]]) {
+      isValid = false;
+      element = arrFields[i];
+      break;
+    }
+  }
+  return {
+    isValid: isValid,
+    element: element,
+  };
+};
+
 let saveDetailInforDoctor = (inputData) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (
-        !inputData.doctorId ||
-        !inputData.contentHTML ||
-        !inputData.contentMarkdown ||
-        !inputData.action ||
-        !inputData.selectedPrice ||
-        !inputData.selectedPayment ||
-        !inputData.selectedProvince ||
-        !inputData.nameClinic ||
-        !inputData.addressClinic
-      ) {
+      let checkObj = checkRequiredFields(inputData);
+      if (!checkObj.isValid === false) {
         resolve({
           errCode: 1,
-          errMessage: "Doctor ID, contentHTML, or contentMarkdown is missing",
+          errMessage: `Missing paremeter ${checkObj.element}`,
           inputData,
         });
       } else {
@@ -91,6 +111,7 @@ let saveDetailInforDoctor = (inputData) => {
             where: { doctorId: inputData.doctorId },
             raw: false,
           });
+
           if (doctorMarkdown) {
             doctorMarkdown.contentHTML = inputData.contentHTML;
             doctorMarkdown.contentMarkdown = inputData.contentMarkdown;
@@ -106,14 +127,33 @@ let saveDetailInforDoctor = (inputData) => {
         });
 
         if (doctorInfor) {
-          doctorInfor.doctorId = inputData.doctorId;
-          doctorInfor.priceId = inputData.selectedPrice;
-          doctorInfor.provinceId = inputData.selectedProvince;
-          doctorInfor.paymentId = inputData.selectedPayment;
-          doctorInfor.nameClinic = inputData.nameClinic;
-          doctorInfor.addressClinic = inputData.addressClinic;
-          await doctorInfor.save();
+          // Check if the specialtyId is different
+          if (doctorInfor.specialtyId !== inputData.specialtyId) {
+            // Create a new Doctor_infor entry
+            await db.Doctor_infor.create({
+              doctorId: inputData.doctorId,
+              priceId: inputData.selectedPrice,
+              provinceId: inputData.selectedProvince,
+              paymentId: inputData.selectedPayment,
+              nameClinic: inputData.nameClinic,
+              addressClinic: inputData.addressClinic,
+              specialtyId: inputData.specialtyId,
+              clinicId: inputData.clinicId,
+            });
+          } else {
+            // Update the existing Doctor_infor entry
+            await doctorInfor.update({
+              priceId: inputData.selectedPrice,
+              provinceId: inputData.selectedProvince,
+              paymentId: inputData.selectedPayment,
+              nameClinic: inputData.nameClinic,
+              addressClinic: inputData.addressClinic,
+              specialtyId: inputData.specialtyId,
+              clinicId: inputData.clinicId,
+            });
+          }
         } else {
+          // Create a new Doctor_infor entry
           await db.Doctor_infor.create({
             doctorId: inputData.doctorId,
             priceId: inputData.selectedPrice,
@@ -121,19 +161,18 @@ let saveDetailInforDoctor = (inputData) => {
             paymentId: inputData.selectedPayment,
             nameClinic: inputData.nameClinic,
             addressClinic: inputData.addressClinic,
+            specialtyId: inputData.specialtyId,
+            clinicId: inputData.clinicId,
           });
         }
+
         resolve({
           errCode: 0,
           errMessage: "Save info doctor succeed",
         });
       }
     } catch (e) {
-      reject({
-        errCode: 2,
-        errMessage: "Failed to save information in the database",
-        error: e,
-      });
+      reject(e);
     }
   });
 };

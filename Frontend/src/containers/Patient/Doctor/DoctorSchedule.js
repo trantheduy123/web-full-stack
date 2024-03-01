@@ -73,6 +73,21 @@ class DoctorSchedule extends Component {
   async componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.language !== prevProps.language) {
       let allDays = this.getArrDays(this.props.language);
+
+      if (this.props.doctorIdFromParent) {
+        let res = await getScheduleDoctorByDate(
+          this.props.doctorIdFromParent,
+          allDays[0].value
+        );
+        this.setState({
+          allAvalableTime: res.data ? res.data : [],
+        });
+
+        this.setState({
+          allAvalableTime: res.data ? res.data : [],
+        });
+      }
+
       this.setState({
         allDays: allDays,
       });

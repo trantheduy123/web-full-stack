@@ -8,6 +8,7 @@ export const path = {
   RESETPASSWORD: "/resetpassword/:token",
   SYSTEM: "/system",
   DETAIL_DOCTOR: "/detail-doctor/:id",
+  DETAIL_SPECIALTY: "/detail-specialty/:id",
   VERIFY_EMAIL_BOOKING: "/verify-booking",
 };
 
